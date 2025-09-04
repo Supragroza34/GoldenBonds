@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Splitwise Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container my-5">
+
+  <h1>Splitwise Clone</h1>
+
+  <!-- Expense Form -->
+  <form id="expenseForm" action="/expenses" method="POST">
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" name="description" id="description" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" name="amount" id="amount" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="paidBy" class="form-label">Paid By (User ID)</label>
+      <input type="number" name="paidBy" id="paidBy" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="splitAmong" class="form-label">Split Among (Comma-separated User IDs)</label>
+      <input type="text" name="splitAmong" id="splitAmong" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Expense</button>
+  </form>
+
+  <% if (expenses && expenses.length > 0) { %>
+    <h2 class="mt-5">Expenses</h2>
+    <ul class="list-group">
+      <% expenses.forEach(exp => { %>
+        <li class="list-group-item">
+          <strong><%= exp.description %></strong> - $<%= exp.amount %> | Paid by: User <%= exp.paidBy %> | Split among: <%= exp.splitAmong.join(", ") %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+</body>
+</html>
